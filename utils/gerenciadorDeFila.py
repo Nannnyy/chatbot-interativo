@@ -14,10 +14,14 @@ def getPergunta(fila):
     return pergunta
 
 def gerarPergunta(pergunta):
+    pergunta_id = pergunta.getId()
+
+    if f"status_question_{pergunta_id}" not in st.session_state:
+        st.session_state[f"status_question_{pergunta_id}"] = None
 
     with st.chat_message("assistant"):
 
-        st.write(f"Questão {pergunta.getId()}")
+        st.write(f"Questão {pergunta_id}")
         st.write(pergunta.getTexto())
         resposta = st.chat_input("Digite a sua resposta", key=str(pergunta.getId()))
         
@@ -25,6 +29,11 @@ def gerarPergunta(pergunta):
             correta = verificarResposta(resposta, pergunta.getRespostaCorreta())
 
             if correta:
-                st.success("Correto!")
+                st.session_state[f"status_question_{pergunta_id}"] = "Correto"
             else:
-                st.error("Incorreto!")
+                st.session_state[f"status_question_{pergunta_id}"] = "Errado"
+            
+        if st.session_state[f"status_question_{pergunta_id}"] == "Correto":
+            st.success("Correto!")
+        elif st.session_state[f"status_question_{pergunta_id}"] == "Errado":
+            st.error("Errado!")
