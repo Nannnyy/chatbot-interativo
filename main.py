@@ -1,6 +1,9 @@
 import streamlit as st
 import json
+
 from models.pergunta import Pergunta
+from fila.fila import Fila
+from fila.no import No
 
 def arquivoUploader():
     arquivo_uploaded = st.file_uploader("Escolha um arquivo", ['json'])
@@ -20,8 +23,15 @@ def construirListaPerguntas(dicionario_json):
         pergunta['resposta_correta']
     ) for pergunta in dicionario_json['perguntas']]
 
-    for pergunta in perguntas:
-        st.write(pergunta)
+    return perguntas
+
+def adicionarPerguntasNaFila(lista_perguntas):
+    fila = Fila()
+
+    for pergunta in lista_perguntas:
+        fila.enfileirar(No(pergunta))
+
 
 dicionario_json = arquivoUploader()
-construirListaPerguntas(dicionario_json)
+lista_perguntas = construirListaPerguntas(dicionario_json)
+adicionarPerguntasNaFila(lista_perguntas)

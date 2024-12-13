@@ -38,6 +38,6 @@ class Fila:
         no = self.inicio
         print("Início -> ", end='')
         while(no is not None):
-            print(f"{no.getValor()}", end=' -> ')
+            print(f"{no.getValor()}")
             no = no.getProximo()
         print("Fim")
