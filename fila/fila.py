@@ -7,6 +7,10 @@ class Fila:
         self.inicio = None
         self.fim = None
 
+    def adicionarPerguntasNaFila(self, lista_perguntas):
+        for pergunta in lista_perguntas:
+            self.enfileirar(No(pergunta))
+
     def getTamanho(self):
         return self.tamanho
 
