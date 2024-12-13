@@ -38,10 +38,10 @@ class Fila:
     def getCabeca(self):
         return self.inicio
 
-    def imprimirFila(self):
-        no = self.inicio
-        print("Início -> ", end='')
-        while(no is not None):
-            print(f"{no.getValor()}")
-            no = no.getProximo()
-        print("Fim")
+    # def imprimirFila(self):
+    #     no = self.inicio
+    #     print("Início -> ", end='')
+    #     while(no is not None):
+    #         print(f"{no.getValor()}")
+    #         no = no.getProximo()
+    #     print("Fim")

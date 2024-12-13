@@ -9,8 +9,4 @@ def arquivoUploader():
         
         string_json = arquivo_uploaded.getvalue().decode("utf-8")
         dados_json = json.loads(string_json)
-        st.write(string_json)
-
-        #imprimir o json
-        st.json(dados_json)
         return dados_json

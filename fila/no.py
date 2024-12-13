@@ -4,6 +4,9 @@ class No:
         self.valor = valor
         self.proximo = proximo
     
+    def __str__(self):
+        return self.valor
+
     def getValor(self):
         return self.valor
     
