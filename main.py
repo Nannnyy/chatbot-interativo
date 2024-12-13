@@ -1,12 +1,27 @@
 import streamlit as st
+import json
+from models.pergunta import Pergunta
 
-def uploaderFile():
-    uploadedFile = st.file_uploader("Escolha um arquivo", ['json'])
+def arquivoUploader():
+    arquivo_uploaded = st.file_uploader("Escolha um arquivo", ['json'])
 
-    if uploadedFile:
+    if arquivo_uploaded:
         
-        stringJson = uploadedFile.getvalue().decode("utf-8")
-        st.json(stringJson)
+        string_json = arquivo_uploaded.getvalue().decode("utf-8")
+        dados_json = json.loads(string_json)
+        st.json(dados_json)
+        return dados_json
 
+def construirListaPerguntas(dicionario_json):
+    perguntas = [Pergunta(
+        pergunta['id'],
+        pergunta['texto'],
+        pergunta['tipo'],
+        pergunta['resposta_correta']
+    ) for pergunta in dicionario_json['perguntas']]
 
-uploaderFile()
+    for pergunta in perguntas:
+        st.write(pergunta)
+
+dicionario_json = arquivoUploader()
+construirListaPerguntas(dicionario_json)
